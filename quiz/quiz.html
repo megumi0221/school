@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz</title>
+</head>
+<body>
+<script>
+var sc = 0;
+var quest = ['3+5', '6+2', '3+8', '7-2', '8+9', '貓', '狗', '狐狸', '兔子', '熊貓'];
+var answers = ['8', '8', '11', '5', '17', 'cat', 'dog', 'fox', 'rabbit', 'panda', 'cat', 'dog', 'fox', 'rabbit'];
+var qid = ['qi0', 'qi1', 'qi2', 'qi3', 'qi4', 'qi5', 'qi6', 'qi7', 'qi8', 'qi9'];
+var inputid = ['i0', 'i1', 'i2', 'i3', 'i4', 'i5', 'i6', 'i7', 'i8', 'i9', 'i10', 'i11', 'i12', 'i13'];
+var fb = ['fb0', 'fb1', 'fb2', 'fb3', 'fb4', 'fb5', 'fb6', 'fb7', 'fb8', 'fb9', 'fb10', 'fb11', 'fb12', 'fb13'];
+var name = window.prompt("Input your name");
+window.document.writeln("<marquee>Welcome <font color=red>" + name + "</font>!</marquee><br>");
+
+function questions() {
+    for (var i = 0; i <= 9; i++) {
+        var qu = document.getElementById(qid[i]);
+        if (i <= 4) {
+            qu.innerHTML = quest[i];
+        } else {
+            qu.innerHTML = quest[i] + "英文為:";
+        }
+    }
+}
+
+function check() {
+    var uans = new Array(14);
+    var fbobj = new Array(14);
+    var msg = "";
+    for (var i = 0; i <= answers.length - 1; i++) {
+        uans[i] = document.getElementById(inputid[i]);
+        fbobj[i] = document.getElementById(fb[i]);
+    }
+    for (var i = 0; i <= answers.length - 1; i++) {
+        if (uans[i].value == answers[i]) {
+            sc += 10;
+            msg = "<font color=red>great!!</font>";
+        } else {
+            sc -= 10;
+            msg = "<font color=blue>bad!!</font>";
+        }
+        fbobj[i].innerHTML = msg;
+    }
+    document.getElementById('fbtotal').innerHTML = sc + "分";
+    var btn = document.getElementById('b0');
+    btn.disabled = true;
+}
+
+function tryagain() {
+    var btn = document.getElementById('b0');
+    btn.disabled = false;
+    sc = 0;
+    for (var i = 0; i <= answers.length - 1; i++) {
+        var uans = document.getElementById(inputid[i]);
+        var fbobj = document.getElementById(fb[i]);
+        uans.value = '';
+        fbobj.innerHTML = '';
+    }
+    document.getElementById('fbtotal').innerHTML = "";
+}
+</script>
+
+<body onload="questions();">
+1.<span id='qi0'></span><input type="text" id="i0" style="width:90px"><span id="fb0"></span><br>
+2.<span id='qi1'></span><input type="text" id="i1" style="width:90px"><span id="fb1"></span><br>
+3.<span id='qi2'></span><input type="text" id="i2" style="width:90px"><span id="fb2"></span><br>
+4.<span id='qi3'></span><input type="text" id="i3" style="width:90px"><span id="fb3"></span><br>
+5.<span id='qi4'></span><input type="text" id="i4" style="width:90px"><span id="fb4"></span><br>
+6.<span id='qi5'></span><input type="text" id="i5" style="width:90px"><span id="fb5"></span><br>
+7.<span id='qi6'></span><input type="text" id="i6" style="width:90px"><span id="fb6"></span><br>
+8.<span id='qi7'></span><input type="text" id="i7" style="width:90px"><span id="fb7"></span><br>
+9.<span id='qi8'></span><input type="text" id="i8" style="width:90px"><span id="fb8"></span><br>
+10.<span id='qi9'></span><input type="text" id="i9" style="width:90px"><span id="fb9"></span><br>
+11.<img src="cat.jpg" width="400" height="200">英文為:<input type="text" id="i10" style="width:90px"><span id="fb10"></span><br>
+12.<img src="dog.jpg" width="400" height="200">英文為:<input type="text" id="i11" style="width:90px"><span id="fb11"></span><br>
+13.<img src="rabbit.jpg" width="400" height="200">英文為:<input type="text" id="i12" style="width:90px"><span id="fb12"></span><br>
+14.<img src="fox.jpg" width="400" height="200">英文為:<input type="text" id="i13" style="width:90px"><span id="fb13"></span><br>
+<button onclick="check();" id="b0">Check</button>
+<button onclick="tryagain();" id="b1">Try Again</button><br>
+<span id="fbtotal"></span><br>
+</body>
+</html>

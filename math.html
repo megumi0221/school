@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Math Quiz</title>
+</head>
+<body>
+<script>
+var ans = [5, 0, 3, 3, 2, 2];
+var cid = ['d0', 'd1', 'd2', 'd3', 'd4', 'd5'];
+var sc = 0;
+
+function gentable() {
+    var tbl = document.getElementById("table1");
+    var tag1 = "<table border><tr>";
+    var head1 = "<tr><td>6</td><td>*</td><td><input type='text' style='width:30px' id='a0'><span id='d0'></span></td><td>=</td><td>30</td></tr>";
+    var head2 = "<tr><td>/</td><td>---</td><td>8</td><td><input type='text' style='width:30px' id='a1'><span id='d1'></span></td><td>/</td></tr>";
+    var head3 = "<tr><td><input type='text' style='width:30px' id='a2'><span id='d2'></span></td><td>*</td><td>1</td><td>=</td><td><input type='text' style='width:30px' id='a3'><span id='d3'></span></td></tr>";
+    var head4 = "<tr><td>=</td><td><input type='text' style='width:30px' id='a4'><span id='d4'></span></td><td>=</td><td>4/2</td><td>=</td></tr>";
+    var head5 = "<tr><td><input type='text' style='width:30px' id='a5'><span id='d5'></span></td><td>*</td><td>5</td><td>=</td><td>10</td></tr>";
+    var tag2 = "</table>";
+    tbl.innerHTML = tag1 + head1 + head2 + head3 + head4 + head5 + tag2;
+}
+
+function check1() {
+    var ck = new Array(6);
+    var tg = new Array(6);
+    var msg = "";
+    for (var i = 0; i <= 5; i++) {
+        ck[i] = document.getElementById('a' + i);
+        tg[i] = document.getElementById(cid[i]);
+    }
+    for (var i = 0; i <= 5; i++) {
+        if (parseInt(ck[i].value) === ans[i]) {
+            sc += 10;
+            msg = "<font color=red>great!!</font>";
+        } else {
+            sc -= 10;
+            msg = "<font color=blue>bad!!</font>";
+        }
+        tg[i].innerHTML = msg;
+    }
+    document.getElementById('fbtotal').innerHTML = sc + "分";
+    var btn = document.getElementById('b0');
+    btn.disabled = true;
+}
+
+function tryagain() {
+    var btn = document.getElementById('b0');
+    btn.disabled = false;
+    sc = 0;
+    var ck = new Array(6);
+    var tg = new Array(6);
+    var msg = "";
+    for (var i = 0; i <= 5; i++) {
+        ck[i] = document.getElementById('a' + i);
+        tg[i] = document.getElementById(cid[i]);
+    }
+    for (var i = 0; i <= 5; i++) {
+        ck[i].value = '';
+        tg[i].innerHTML = msg;
+    }
+    document.getElementById('fbtotal').innerHTML = "";
+}
+</script>
+
+<body onload="gentable();">
+<p id="table1"></p>
+<button onclick="check1();" id="b0">check</button>
+<button onclick="tryagain();" id="b1">try again</button><br>
+<span id="fbtotal"></span><br>
+</body>
+</html>
